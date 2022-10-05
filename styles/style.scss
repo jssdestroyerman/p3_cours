@@ -1,0 +1,199 @@
+$cd-txt: #6300a0;
+$cd-txt--invalid: #fff;
+$cd-danger : #b20a37 ;
+$shake-intensity: 1%;
+
+/* mixins pour load bar */ 
+
+@mixin loader-anim {
+    .load__bar--1 {
+        animation-delay: 200ms;
+    }
+    .load__bar--2 {
+        animation-delay: 400ms;
+    }
+    .load__bar--3 {
+        animation-delay: 600ms;
+    }
+    .load__bar--4 {
+        animation-delay: 800ms;
+    }
+    .load__bar--5 {
+        animation-delay: 1000ms;
+    }
+}
+
+@mixin loader-anim-inv {
+    .load__bar--1-inv {
+        animation-delay: 200ms;
+        animation-direction: alternate-reverse; 
+        background: #0E397F;
+        &:hover {
+        animation-play-state: paused;
+        }
+    }
+    .load__bar--2-inv {
+        animation-delay: 400ms;
+        animation-direction: alternate-reverse;
+        animation-fill-mode: forwards;
+        background: #0E397F;
+        &:hover {
+            animation-play-state: paused;
+            }
+    }
+    .load__bar--3-inv {
+        animation-delay: 600ms;
+        animation-direction: alternate-reverse;
+        animation-fill-mode: forwards;
+        background: #0E397F;
+        &:hover {
+            animation-play-state: paused;
+            }
+    }
+    .load__bar--4-inv {
+        animation-delay: 800ms;
+        animation-direction: alternate-reverse;
+        animation-fill-mode: forwards;
+        background: #0E397F;
+        &:hover {
+            animation-play-state: paused;
+            }
+    }
+    .load__bar--5-inv {
+        animation-delay: 1000ms;
+        animation-direction: alternate-reverse;
+        animation-fill-mode: forwards;
+        background: #0E397F;
+        &:hover {
+            animation-play-state: paused;
+            }   
+    }      
+}
+
+
+/* include les mixins */ 
+
+html {
+    @include loader-anim;
+    @include loader-anim-inv;
+}
+
+
+.load {
+    width: 300px;
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    &__bar {
+        background-color: #15DEA5;
+        height: 100%;
+        width: 10%;
+        animation-name: bars;
+        animation-duration: 1000ms;
+        animation-fill-mode: backwards;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+}
+
+/* ScaleY pour les tailles des barres */ 
+
+@keyframes bars {
+    0% {
+        transform: scaleY(0.5);
+        
+    }
+    100% {
+        transform: scaleY(1.0);
+    }
+}
+
+
+/* carré qui tourne */ 
+
+.container_1 {
+    display: flex;
+    justify-content: center;
+    .spin {
+        background-color: #15DEA5;
+        width: 20vh;
+        height: 20vh;
+        animation: spin;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;   
+        animation-timing-function: linear;
+        animation-play-state: paused;
+        &:hover {
+            animation-play-state: running;
+        }    
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+/* formulaire email */ 
+
+
+
+
+
+
+
+
+.form {
+    display: flex;
+    justify-content: center;
+    &__group {
+        display: flex;
+        justify-content: center;
+        & input {
+            display: block;
+            border-radius: 100rem;
+            color: $cd-txt;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            outline: none;
+            margin-top: 20px;
+            padding: .5rem 1.5rem;
+            width: 40%;
+            transition: background-color 500ms;
+            &:focus {
+                border: 2px solid $cd-txt;
+            }
+            &:not(:focus):invalid {
+                background-color: $cd-danger;
+                border: 2px solid $cd-danger;
+                color: $cd-txt--invalid;
+                animation-name: headshake;
+                animation-duration: 100ms;
+                animation-iteration-count: 2;
+            }
+        }
+        
+    }
+}
+
+@keyframes headshake {
+    25% {
+        // entièrement à droite
+        transform: translateX($shake-intensity);
+    }
+    75% {
+        // entièrement à gauche
+        transform: translateX(-$shake-intensity);
+    }
+}
